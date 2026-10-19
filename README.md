@@ -37,11 +37,11 @@ Models used:
 
 ## Results
 
-Best model achieved:
-
-- Accuracy: 
-- Precision: 
-- Recall: 
+Best model achieved: 
+VGG16_Unfreeze4_Weighted
+- Mean Balanced Accuracy: 0.554013383
+- Macro Precision: 0.54884659
+- Macro Recall: 0.584577897
 
 ## Key Findings
 
