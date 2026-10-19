@@ -4,6 +4,8 @@
 
 This project investigates ...
 
+This independent project develops a facial emotion recognition investigation from work originally undertaken during my Open University studies. It extends the project into a reproducible comparison of custom CNN architectures, transfer-learning models, training strategies and evaluation measures.
+
 ## Objective
 
 The goal was to predict ...
