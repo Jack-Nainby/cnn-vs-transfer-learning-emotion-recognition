@@ -1,0 +1,30 @@
+
+# Original and processed FER2013 datasets
+/data/raw/fer2013.csv
+/data/processed/training_data.csv
+/data/processed/validation_data.csv
+/data/processed/testing_data.csv
+
+# Trained neural network models
+*.keras
+*.h5
+*.hdf5
+
+# Model checkpoints and temporary training files
+*.ckpt
+*.weights.h5
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Local Python environments
+.venv/
+venv/
+
+# Operating system files
+.DS_Store
+Thumbs.db
