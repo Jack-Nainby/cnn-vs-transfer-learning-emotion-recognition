@@ -46,11 +46,11 @@ Goodfellow, I. J., Erhan, D., Carrier, P. L., et al. (2013). *Challenges in Repr
 
 Dataset: [FER2013 – Kaggle](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge)
 
-### Dataset availability and exclusions
+### Dataset availability
 
-The FER2013 CSV files are not included in this repository. The original dataset is subject to its own source terms and should be obtained from Kaggle.
+The FER2013 CSV files are not included in this repository. Obtain the dataset from Kaggle and follow the dataset source's terms.
 
-The repository's `.gitignore` excludes the raw dataset, the processed partition CSV files, and trained model files. These files must therefore be available locally before the corresponding data preparation, training or evaluation steps can be run.
+The raw and processed dataset files are excluded from version control. You will need to provide the dataset locally and run the relevant data-preparation workflow before running notebooks that depend on the processed files.
 
 ## Methodology
 
@@ -117,9 +117,9 @@ The project uses:
 - Matplotlib
 - Jupyter Notebook
 
-The experiments were developed and run in a Docker-based environment using an NVIDIA TensorFlow container with GPU acceleration. The repository includes a `Dockerfile` for the project environment.
+The experiments were developed and run in a Docker-based environment with GPU acceleration. The repository includes a `Dockerfile` and `requirements.txt` to support environment setup.
 
-GPU support depends on the host system and its Docker/NVIDIA configuration. The notebooks may require substantial memory and compute resources; successful execution on a CPU or a different GPU is not guaranteed to match the original run times or results.
+GPU support depends on the host system, drivers and Docker/NVIDIA configuration. Training is resource-intensive, and execution time or results may differ on other hardware or software versions.
 
 ## Results
 
@@ -169,65 +169,74 @@ Importantly, the models classify images according to FER2013's predefined expres
 
 ## Repository contents
 
-- `data/` — expected location for locally stored raw and processed dataset files. The dataset CSV files are excluded from version control.
-- `notebooks/` — Jupyter notebooks for the CNN experiments, transfer-learning experiments and plot generation.
-- `src/` — Python modules for configuration, dataset handling, model definitions and training.
-- `scripts/` — supporting scripts, including the environment diagnostic script.
-- `reports/` — the short technical report and full report, with supporting LaTeX and PDF files.
-- `results/` — experimental results, spreadsheets and generated plots.
-- `models/` — local model output location. Trained model files are excluded from version control.
-- `Dockerfile` — definition of the Docker-based experiment environment.
-- `requirements.txt` — Python package requirements for a conventional Python environment.
+The GitHub repository contains the project code, notebooks, reports and supporting materials. Its visible top-level structure includes:
+
+| Path | Contents |
+|---|---|
+| `data/processed/` | Directory for processed data-related files |
+| `notebooks/` | Jupyter notebooks |
+| `reports/` | Project reports and related materials |
+| `results/` | Experimental results and supporting outputs |
+| `scripts/` | Supporting scripts |
+| `src/` | Python source code |
+| `.gitignore` | Files and directories excluded from version control |
+| `Dockerfile` | Docker environment definition |
+| `requirements.txt` | Python package requirements |
+| `README.md` | Project overview and documentation |
+
+The raw and processed FER2013 CSV files and trained model files are excluded from version control. Their absence from the repository does not mean they were not used during the experiments; they were part of the local working environment.
+
+## Jupyter working environment
+
+During the experiments, the project was run in a Jupyter environment whose file browser showed the following folders:
+
+- `confusion_matrices`
+- `data`
+- `histories`
+- `models`
+- `plots`
+- `reports`
+- `results`
+- `src`
+
+The Jupyter file browser also showed the notebooks `CNN_all.ipynb`, `Transfer_part1.ipynb`, `Transfer_part2.ipynb` and `All_Plots.ipynb`, along with `check_environment.py`, `Dockerfile` and `requirements.txt`.
+
+This describes the working environment used during the experiments; it is not a representation of the GitHub repository's directory structure. When running the notebooks in another Jupyter environment, check their file paths and ensure that the required data, output folders and supporting files are available in the locations expected by the notebook code.
 
 ## Reproducibility
 
-The repository provides the notebooks and source code used for data preparation, model construction, training, evaluation and plot generation. Reproducing the experiments also requires the FER2013 dataset, a compatible software environment and sufficient compute resources.
+The repository provides notebooks and supporting code for data preparation, model construction, training, evaluation and plot generation. Reproducing the experiments also requires the FER2013 dataset, a compatible software environment and sufficient compute resources.
 
 ### 1. Obtain the dataset
 
 Download FER2013 from the [Kaggle dataset page](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge).
 
-Place the downloaded `fer2013.csv` file at:
-
-```text
-data/raw/fer2013.csv
-```
-
-The raw dataset is not committed to this repository. You must obtain it separately and comply with the dataset source's terms.
+The dataset files are not committed to this repository. Place the downloaded files in the location expected by the data-loading and preprocessing code.
 
 ### 2. Prepare the data
 
-The processed partition files are also excluded from version control. Use the data-preparation workflow in the notebooks and supporting source code to create the training, validation and testing files expected by the project.
+The processed dataset files are also excluded from version control. Run the relevant data-preparation workflow in the notebooks or supporting source code to generate the files required by the training and evaluation notebooks.
 
-The processed files are expected at:
-
-```text
-data/processed/training_data.csv
-data/processed/validation_data.csv
-data/processed/testing_data.csv
-```
-
-The exact notebook execution order and any local path adjustments should be checked against the relevant notebook cells before running the experiments.
+Check the file paths in the relevant notebook cells before running them. The exact local paths and required execution order depend on the data-preparation workflow.
 
 ### 3. Set up the environment
 
-The repository includes a `Dockerfile` based on NVIDIA's TensorFlow container. It installs JupyterLab, Jupyter Notebook, pandas, Matplotlib, NumPy and scikit-learn.
+The project was developed in a Docker-based Jupyter environment. The repository includes a `Dockerfile` and a `requirements.txt` file.
 
-A Docker image can be built from the repository root with:
-
-```bash
-docker build -t fer2013-experiments .
-```
-
-The Dockerfile starts JupyterLab on port `8888`. To use the container with GPU acceleration, Docker must be configured to access a compatible NVIDIA GPU and its drivers. The container image and GPU setup are specific to the original experiment environment; other systems may require adjustments.
-
-The `requirements.txt` file is provided for a conventional Python environment, but it is not a complete substitute for the Docker environment used in the experiments. TensorFlow installation and GPU support should be configured for the user's operating system and hardware.
+The `Dockerfile` defines the container environment, while `requirements.txt` lists Python package requirements. TensorFlow installation and GPU support depend on the host operating system, hardware, drivers and Docker/NVIDIA configuration. A conventional Python installation may require environment-specific adjustments.
 
 ### 4. Run the notebooks
 
-Open the notebooks in `notebooks/` and follow their cells for the relevant experiment. The project includes notebooks for the custom CNN experiments, transfer-learning stages and plot generation.
+Open the project in Jupyter and run the notebooks as needed:
 
-Training is resource-intensive and may take substantially longer on different hardware. Results may also vary with software versions, hardware, random seeds and other execution details. The reported results should therefore be treated as the outcomes of the recorded experimental runs, not as guaranteed results from every rerun.
+1. `CNN_all.ipynb` — custom CNN experiments.
+2. `Transfer_part1.ipynb` — first-stage transfer-learning experiments.
+3. `Transfer_part2.ipynb` — second-stage transfer-learning experiments.
+4. `All_Plots.ipynb` — plot generation.
+
+The notebooks may depend on data, results or model files created by earlier cells or other notebooks. Follow the notebook execution order and check its paths and prerequisites before running a full experiment.
+
+Training is resource-intensive and may take substantially longer on different hardware. Results may also vary with software versions, hardware, random seeds and other execution details. The reported results are the outcomes of the recorded experimental runs, not guaranteed results from every rerun.
 
 ## Further work
 
