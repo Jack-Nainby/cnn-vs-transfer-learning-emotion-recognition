@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project investigates facial emotion recognition using the FER2013 dataset. It compares custom convolutional neural network (CNN) architectures with established transfer-learning models, examining how architectural design choices and training strategies influence classification performance.
+This project investigates facial expression classification using the FER2013 dataset. It compares custom convolutional neural network (CNN) architectures with established transfer-learning models, examining how architectural design choices and training strategies influence classification performance.
 
 Originally developed from work undertaken during my Open University studies, this independent project extends the investigation into a comparative evaluation of custom CNN architectures, pretrained models, training strategies and performance measures.
 
@@ -10,11 +10,11 @@ The experiments consider not only overall classification accuracy, but also clas
 
 ## Research Aim
 
-The aim of this project is to evaluate how architectural design choices and selected training strategies influence the predictive performance and computational efficiency of deep-learning models for facial emotion recognition.
+The aim of this project is to evaluate how architectural design choices and selected training strategies influence the predictive performance and computational efficiency of deep-learning models for facial expression classification.
 
 The investigation addresses the following research question:
 
-> How do architectural design choices and training strategies influence the performance of deep-learning models for facial emotion recognition on the FER2013 dataset?
+> How do architectural design choices and training strategies influence the performance of deep-learning models for facial expression classification on the FER2013 dataset?
 
 ## Dataset
 
@@ -46,9 +46,15 @@ Goodfellow, I. J., Erhan, D., Carrier, P. L., et al. (2013). *Challenges in Repr
 
 Dataset: [FER2013 – Kaggle](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge)
 
+### Dataset availability
+
+The FER2013 CSV files are not included in this repository. Obtain the dataset from Kaggle and follow the dataset source's terms.
+
+The raw and processed dataset files are excluded from version control. You will need to provide the dataset locally and run the relevant data-preparation workflow before running notebooks that depend on the processed files.
+
 ## Methodology
 
-The investigation compared four custom CNN architectures with three pretrained transfer-learning architectures:
+The investigation compared four custom CNN architectures with three pretrained transfer-learning architectures.
 
 ### Custom CNN architectures
 
@@ -99,18 +105,21 @@ Models were assessed using a range of complementary measures:
 
 Using multiple measures helped identify differences that overall accuracy alone could conceal, particularly for underrepresented emotion categories.
 
-## Technologies
+## Technologies and environment
 
 The project uses:
 
 - Python
-- TensorFlow
-- Keras
+- TensorFlow and Keras
 - NumPy
+- pandas
+- scikit-learn
 - Matplotlib
 - Jupyter Notebook
 
-The experiments were developed and run in a Docker-based environment with GPU acceleration.
+The experiments were developed and run in a Docker-based environment with GPU acceleration. The repository includes a `Dockerfile` and `requirements.txt` to support environment setup.
+
+GPU support depends on the host system, drivers and Docker/NVIDIA configuration. Training is resource-intensive, and execution time or results may differ on other hardware or software versions.
 
 ## Results
 
@@ -133,7 +142,7 @@ Its reported results included:
 | Macro recall* | 0.5846 |
 | Macro F1* | 0.5579 |
 
-*Macro-averaged classification-report measures are from the selected best run, rather than averages across the five successful runs. Accuracy and balanced accuracy are repeated-run means.*
+*The macro-averaged classification-report measures are from the selected best run, rather than averages across the five successful runs. Accuracy and balanced accuracy are repeated-run means.*
 
 ### Key findings
 
@@ -158,30 +167,78 @@ The findings should be interpreted within the scope of the experiments conducted
 
 Importantly, the models classify images according to FER2013's predefined expression labels. These predictions should not be interpreted as definitive assessments of a person's actual emotional or psychological state.
 
-## Repository Contents
+## Repository contents
 
-The repository is intended to contain the relevant project materials, including:
+The GitHub repository contains the project code, notebooks, reports and supporting materials. Its visible top-level structure includes:
 
-- Technical project report
-- Jupyter notebooks
-- Python source code
-- Model implementation and training code
-- Evaluation and comparison code
-- Supporting plots and figures
-- Experimental results and supplementary material
-- References and supporting documentation
+| Path | Contents |
+|---|---|
+| `data/processed/` | Directory for processed data-related files |
+| `notebooks/` | Jupyter notebooks |
+| `reports/` | Project reports and related materials |
+| `results/` | Experimental results and supporting outputs |
+| `scripts/` | Supporting scripts |
+| `src/` | Python source code |
+| `.gitignore` | Files and directories excluded from version control |
+| `Dockerfile` | Docker environment definition |
+| `requirements.txt` | Python package requirements |
+| `README.md` | Project overview and documentation |
 
-See the repository folders for the individual files and supporting materials.
+The raw and processed FER2013 CSV files and trained model files are excluded from version control. Their absence from the repository does not mean they were not used during the experiments; they were part of the local working environment.
+
+## Jupyter working environment
+
+During the experiments, the project was run in a Jupyter environment whose file browser showed the following folders:
+
+- `confusion_matrices`
+- `data`
+- `histories`
+- `models`
+- `plots`
+- `reports`
+- `results`
+- `src`
+
+The Jupyter file browser also showed the notebooks `CNN_all.ipynb`, `Transfer_part1.ipynb`, `Transfer_part2.ipynb` and `All_Plots.ipynb`, along with `check_environment.py`, `Dockerfile` and `requirements.txt`.
+
+This describes the working environment used during the experiments; it is not a representation of the GitHub repository's directory structure. When running the notebooks in another Jupyter environment, check their file paths and ensure that the required data, output folders and supporting files are available in the locations expected by the notebook code.
 
 ## Reproducibility
 
-The project uses TensorFlow/Keras and a GPU-enabled Docker environment.
+The repository provides notebooks and supporting code for data preparation, model construction, training, evaluation and plot generation. Reproducing the experiments also requires the FER2013 dataset, a compatible software environment and sufficient compute resources.
 
-To reproduce the experiments, the required Python environment, dataset and supporting files must be available. The notebooks and source code provide the implementation details for data preparation, model construction, training and evaluation.
+### 1. Obtain the dataset
 
-The FER2013 dataset should be obtained from its original Kaggle source rather than assumed to be included with the source code.
+Download FER2013 from the [Kaggle dataset page](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge).
 
-## Further Work
+The dataset files are not committed to this repository. Place the downloaded files in the location expected by the data-loading and preprocessing code.
+
+### 2. Prepare the data
+
+The processed dataset files are also excluded from version control. Run the relevant data-preparation workflow in the notebooks or supporting source code to generate the files required by the training and evaluation notebooks.
+
+Check the file paths in the relevant notebook cells before running them. The exact local paths and required execution order depend on the data-preparation workflow.
+
+### 3. Set up the environment
+
+The project was developed in a Docker-based Jupyter environment. The repository includes a `Dockerfile` and a `requirements.txt` file.
+
+The `Dockerfile` defines the container environment, while `requirements.txt` lists Python package requirements. TensorFlow installation and GPU support depend on the host operating system, hardware, drivers and Docker/NVIDIA configuration. A conventional Python installation may require environment-specific adjustments.
+
+### 4. Run the notebooks
+
+Open the project in Jupyter and run the notebooks as needed:
+
+1. `CNN_all.ipynb` — custom CNN experiments.
+2. `Transfer_part1.ipynb` — first-stage transfer-learning experiments.
+3. `Transfer_part2.ipynb` — second-stage transfer-learning experiments.
+4. `All_Plots.ipynb` — plot generation.
+
+The notebooks may depend on data, results or model files created by earlier cells or other notebooks. Follow the notebook execution order and check its paths and prerequisites before running a full experiment.
+
+Training is resource-intensive and may take substantially longer on different hardware. Results may also vary with software versions, hardware, random seeds and other execution details. The reported results are the outcomes of the recorded experimental runs, not guaranteed results from every rerun.
+
+## Further work
 
 Potential extensions include:
 
