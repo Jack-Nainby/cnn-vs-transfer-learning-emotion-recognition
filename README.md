@@ -188,20 +188,37 @@ The raw and processed FER2013 CSV files and trained model files are excluded fro
 
 ## Jupyter working environment
 
-During the experiments, the project was run in a Jupyter environment whose file browser showed the following folders:
+The notebooks were developed in a Jupyter environment with the following output folders:
 
-- `confusion_matrices`
-- `data`
-- `histories`
-- `models`
-- `plots`
-- `reports`
-- `results`
-- `src`
+- `histories/`
+- `models/`
+- `plots/`
+- `plots/confusion_matrices/`
+- `plots/history/`
+- `reports/`
+- `results/`
 
-The Jupyter file browser also showed the notebooks `CNN_all.ipynb`, `Transfer_part1.ipynb`, `Transfer_part2.ipynb` and `All_Plots.ipynb`, along with `check_environment.py`, `Dockerfile` and `requirements.txt`.
+The project also uses folders:
 
-This describes the working environment used during the experiments; it is not a representation of the GitHub repository's directory structure. When running the notebooks in another Jupyter environment, check their file paths and ensure that the required data, output folders and supporting files are available in the locations expected by the notebook code.
+- `data/` - for dataset files. Only `fer2013.csv` is required to run the notebooks.
+- `src/` for supporting code.
+
+The notebooks are:
+
+- `CNN_all.ipynb` - custom CNN experiments.
+- `Transfer_part1.ipynb` - first-stage transfer-learning experiments.
+- `Transfer_part2.ipynb` - second-stage transfer-learning experiments.
+- `All_Plots.ipynb` - plot generation.
+
+The Jupyter working environment is separate from the GitHub repository’s directory structure. The notebooks expect the required data files and output folders to be available in their working environment.
+
+## Prepare the notebook output folders
+
+Run `scripts/check_environment.py` from the repository root before running the notebooks:
+
+```bash
+python scripts/check_environment.py
+```
 
 ## Reproducibility
 
@@ -209,9 +226,11 @@ The repository provides notebooks and supporting code for data preparation, mode
 
 ### 1. Obtain the dataset
 
-Download FER2013 from the [Kaggle dataset page](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge).
+The FER2013 dataset originates from the [Kaggle dataset page](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge).
 
-The dataset files are not committed to this repository. Place the downloaded files in the location expected by the data-loading and preprocessing code.
+This project uses `fer2013.csv`, obtained from the [FER 2013 dataset on Kaggle](https://www.kaggle.com/datasets/muhammadahmed3092/fer-2013).
+
+The dataset is used for facial-expression classification across seven emotion classes. The CSV is not included in this repository; download it from Kaggle and place it in the expected `data/` location before running the notebooks.
 
 ### 2. Prepare the data
 
