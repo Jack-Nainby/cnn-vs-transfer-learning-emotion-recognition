@@ -1,2 +1,9 @@
+# Python dependencies for the FER2013 CNN and transfer-learning project.
+# TensorFlow is provided by the NVIDIA TensorFlow Docker base image.
+
 numpy
+pandas
 matplotlib
+scikit-learn
+jupyterlab
+notebook
