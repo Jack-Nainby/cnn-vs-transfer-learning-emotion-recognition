@@ -1,12 +1,6 @@
 FROM nvcr.io/nvidia/tensorflow:25.02-tf2-py3
 
-RUN pip install \
-    jupyterlab \
-    notebook \
-    pandas \
-    matplotlib \
-    numpy \
-    scikit-learn
+RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /workspace
 
